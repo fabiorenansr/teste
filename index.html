@@ -11,12 +11,32 @@
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Montserrat', sans-serif; background-color: #faf6f5; color: #4a4a4a; overflow-x: hidden; }
+        
+        /* Ajuste para rolagem suave e compensação do menu fixo */
+        html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+        
+        body { font-family: 'Montserrat', sans-serif; background-color: #faf6f5; color: #4a4a4a; overflow-x: hidden; padding-top: 80px; }
         a { text-decoration: none; color: inherit; }
         .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         
-        header { background-color: #ffffff; padding: 20px 0; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.03); }
-        header h1 { font-family: 'Playfair Display', serif; font-size: 28px; color: #d48c8f; font-weight: 600; letter-spacing: 2px; }
+        /* Cabeçalho Novo: Fixo, Logo à esquerda, Menu à direita */
+        header { background-color: #ffffff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 10px 0; }
+        .header-container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        .brand { display: flex; align-items: center; gap: 15px; }
+        .header-logo { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid #d48c8f; }
+        header h1 { font-family: 'Playfair Display', serif; font-size: 24px; color: #d48c8f; font-weight: 600; letter-spacing: 2px; }
+
+        nav { display: flex; gap: 20px; }
+        nav a { font-size: 13px; font-weight: 600; color: #5c4646; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
+        nav a:hover { color: #d48c8f; }
+
+        @media (max-width: 768px) {
+            .header-container { flex-direction: column; gap: 15px; }
+            nav { flex-wrap: wrap; justify-content: center; gap: 15px; }
+            html { scroll-padding-top: 130px; }
+            body { padding-top: 120px; }
+        }
 
         .banner-section { width: 100%; max-width: 1400px; margin: 20px auto; padding: 0 15px; position: relative; }
         .carousel-container { position: relative; width: 100%; height: 380px; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); background-color: #fceeed; }
@@ -74,10 +94,22 @@
         .loading-placeholder { text-align: center; padding: 40px; font-style: italic; color: #9c8889; }
     </style>
 </head>
-<body>
+<body id="home">
 
     <header>
-        <h1>LAVIGNE LAÇOS</h1>
+        <div class="header-container">
+            <div class="brand">
+                <img src="logo.png" alt="Logo Lavigne Laços" class="header-logo" onerror="this.src='https://placehold.co/50x50?text=Logo'">
+                <h1>LAVIGNE LAÇOS</h1>
+            </div>
+            <nav>
+                <a href="#home">Home</a>
+                <a href="#produtos">Lacinhos</a>
+                <a href="#depoimentos">Depoimentos</a>
+                <a href="#sobre">Sobre</a>
+                <a href="https://wa.me/551199966688?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20lindos%20lacinhos%20da%20Lavigne%20Laços!" target="_blank">Contato</a>
+            </nav>
+        </div>
     </header>
 
     <section class="banner-section">
@@ -89,7 +121,7 @@
         <div class="carousel-dots" id="carouselDots"></div>
     </section>
 
-    <section class="container products-section">
+    <section id="produtos" class="container products-section">
         <h2 class="section-title">Nossos Lindos Laços</h2>
         <div class="products-table-container">
             <table class="products-table">
@@ -108,14 +140,14 @@
         </div>
     </section>
 
-    <section class="container testimonials-section">
+    <section id="depoimentos" class="container testimonials-section">
         <h2 class="section-title">O que as mamães dizem:</h2>
         <div class="testimonials-grid" id="testimonialsGrid">
             <div class="loading-placeholder" style="grid-column: span 5;">Carregando depoimentos...</div>
         </div>
     </section>
 
-    <section class="about-section">
+    <section id="sobre" class="about-section">
         <div class="container">
             <div class="about-box" id="aboutBox">
                 <div class="loading-placeholder">Carregando biografia...</div>
